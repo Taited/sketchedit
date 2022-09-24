@@ -17,12 +17,34 @@ import models
 import torch
 
 opt = TestOptions().parse()
+
+# # set web options
+# opt.batchSize=1
+# opt.nThreads=1
+# opt.name='celeb'
+# opt.joint_train_inp=True
+# opt.dataset_mode = "testimage"
+# opt.image_dirs = './datasets/face_release/images'
+# opt.mask_dirs = './datasets/face_release/edges' 
+# opt.image_lists = './datasets/face_release/list.txt'
+# opt.filelist = './static/images/datasets/face_release/list.txt'
+# opt.image_postfix = '.png' 
+# opt.mask_postfix = '.png'
+# opt.model = 'editline2'
+# opt.netG = 'deepfillc2'
+# opt.pool_type = 'max'
+# opt.use_cam = True
+# opt.which_epoch = 'latest'
+# opt.output_dir = '../datasets/face_release/results'
+
+# print(opt.model)
 model = models.create_model(opt)
 model.eval()
 
 max_size = 640
 max_num_examples = 200
 UPLOAD_FOLDER = 'static/images'
+UPLOAD_FOLDER = 'static/images/datasets/face_release/images'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'JPG', 'jpeg', 'bmp'])
@@ -116,5 +138,4 @@ def hello(name=None):
 
 
 if __name__ == "__main__":
-
-    app.run(host='0.0.0.0', debug=False, port=port, threaded=True)
+    app.run(host='0.0.0.0', debug=False, port=9090, threaded=True)
